@@ -39,6 +39,7 @@ def run_nc_l0(test_object, outs):
       y2 = test_object.ensemble_dnn_pred(np.array([im]))
       if y1 != y2:
         found_count += 1
+
         adversarials.append([im, new_im])
         inp_ub=test_object.inp_ub
         save_adversarial_examples([new_im/(inp_ub*1.0), '{0}-adv-{1}'.format(len(adversarials), y1)], [im/(inp_ub*1.0), '{0}-original-{1}'.format(len(adversarials), y2)], None, nc_results.split('/')[0])
