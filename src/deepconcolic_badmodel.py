@@ -54,6 +54,19 @@ def create_ensemble_prediction_func():
   return func
 
 
+def create_model_prediction_func(test_model):
+  inp = Input(shape=(32, 32, 3))
+  out = test_model(inp)
+  pred = K.argmax(out)
+
+  functor = K.function([inp], [pred])
+
+  def func(x):
+    return functor((x, ))[0]
+
+  return func
+
+
 def deepconcolic(test_object, outs):
   print('\n== Start DeepConcolic testing ==\n')
   if test_object.criterion=='nc': ## neuron cover
@@ -123,7 +136,7 @@ def main():
   img_rows, img_cols, img_channels = int(args.img_rows), int(args.img_cols), int(args.img_channels)
 
   test_dnn=None
-  ensemble_dnn = create_ensemble_prediction_func()
+  ensemble_dnn_pred = create_ensemble_prediction_func()
   inp_ub=1
   assert args.model!='-1'
   test_dnn=load_model(args.model)
@@ -175,8 +188,8 @@ def main():
     print (' \n == Please specify the output directory == \n')
     sys.exit(0)
 
-
-  test_object=test_objectt_badmodel(test_dnn, ensemble_dnn, raw_data, criterion, norm)
+  test_dnn_pred = create_model_prediction_func(test_dnn)
+  test_object=test_objectt_badmodel(test_dnn, test_dnn_pred, ensemble_dnn_pred, raw_data, criterion, norm)
   test_object.cond_ratio=cond_ratio
   test_object.top_classes=top_classes
   test_object.inp_ub=inp_ub

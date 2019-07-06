@@ -190,8 +190,9 @@ class raw_datat:
 
 
 class test_objectt_badmodel:
-  def __init__(self, test_dnn, ensemble_dnn_pred, raw_data, criterion, norm, pre_fn=None):
+  def __init__(self, test_dnn, test_dnn_pred, ensemble_dnn_pred, raw_data, criterion, norm, pre_fn=None):
     self.test_dnn = test_dnn
+    self.test_dnn_pred = test_dnn_pred
     self.ensemble_dnn_pred = ensemble_dnn_pred
     self.raw_data = raw_data
     ## test config
