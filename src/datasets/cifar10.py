@@ -66,10 +66,10 @@ def get_cifar10_dataset():
 
 def get_cifar10_dataset_np():
     trainset, testset = get_cifar10_dataset()
-    train_data = (np.asarray(trainset.train_data, np.float32) / 255.).transpose((0, 3, 1, 2))
+    train_data = (np.asarray(trainset.train_data, np.float32) / 255.)
     train_labels = np.asarray(trainset.train_labels, dtype=np.int64)
 
-    test_data = (np.asarray(testset.test_data, np.float32) / 255.).transpose((0, 3, 1, 2))
+    test_data = (np.asarray(testset.test_data, np.float32) / 255.)
     test_labels = np.asarray(testset.test_labels, dtype=np.int64)
     return train_data, train_labels, test_data, test_labels
 
