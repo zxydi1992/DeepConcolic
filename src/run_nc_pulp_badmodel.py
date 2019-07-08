@@ -24,7 +24,7 @@ def run_nc_linf(test_object, outs):
   d_advs=[]
 
   #base_constraints=create_base_constraints(test_object.dnn)
-  base_constraints, var_names=create_base_prob(test_object.dnn)
+  base_constraints, var_names=create_base_prob(test_object.test_dnn)
 
   count = 0
   feasible_count = 0
@@ -55,7 +55,7 @@ def run_nc_linf(test_object, outs):
     mkey=nc_layer.layer_index
     if act_in_the_layer(nc_layer.layer) != 'relu':
       mkey+=1
-    feasible, d, new_im=negate(test_object.dnn, act_inst, [im], nc_layer, nc_pos-s, base_constraints[mkey], var_names)
+    feasible, d, new_im=negate(test_object.test_dnn, act_inst, [im], nc_layer, nc_pos-s, base_constraints[mkey], var_names)
 
     cover_layers[index_nc_layer].disable_by_pos(pos)
     if feasible:
