@@ -31,9 +31,9 @@ def run_nc_linf(test_object, outs):
   found_count = 0
 
   while True:
-    feasible_count += 1
+    count += 1
 
-    index_nc_layer, nc_pos, nc_value=get_nc_next(cover_layers, test_object.layer_indices)
+    index_nc_layer, nc_pos, nc_value = get_nc_next(cover_layers, test_object.layer_indices)
     #print (nc_layer.layer_index, nc_pos, nc_value/nc_layer.pfactor)
     nc_layer=cover_layers[index_nc_layer]
     #print (np.array(nc_layer.activations).shape)
@@ -59,12 +59,13 @@ def run_nc_linf(test_object, outs):
 
     cover_layers[index_nc_layer].disable_by_pos(pos)
     if feasible:
-      feasible_count += 1
 
       if linf_filtered(test_object.raw_data.data, new_im): 
         print ('does not linf post filter')
         continue
       print ('\nis feasible!!!\n')
+      feasible_count += 1
+
       test_cases.append(new_im)
       new_act=eval(layer_functions, new_im)
       #if len(pos)>3:

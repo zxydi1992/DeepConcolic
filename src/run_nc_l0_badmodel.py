@@ -29,10 +29,11 @@ def run_nc_l0(test_object, outs):
     d_adv=-1
 
     if feasible:
-      feasible_count += 1
 
       if l0_filtered(test_object.raw_data.data, new_im): 
         continue
+      feasible_count += 1
+
       test_cases.append(new_im)
       update_nc_map_via_inst(cover_layers, eval(layer_functions, new_im), (test_object.layer_indices, test_object.feature_indices))
       y1 = test_object.test_dnn_pred(np.array([new_im]))
@@ -47,6 +48,7 @@ def run_nc_l0(test_object, outs):
         d_advs.append(d_adv)
         if len(d_advs)%100==0:
           print_adversarial_distribution(d_advs, nc_results.replace('.txt', '')+'-adversarial-distribution.txt', True)
+
     covered, not_covered=nc_report(cover_layers, test_object.layer_indices, test_object.feature_indices)
     
     f = open(nc_results, "a")
