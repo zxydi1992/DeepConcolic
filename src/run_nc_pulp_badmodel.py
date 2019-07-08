@@ -15,7 +15,7 @@ from utils import *
 from nc_pulp import *
 #from lp_encoding import *
 from pulp_encoding import *
-from nc_setup import nc_setup
+from nc_setup_badmodel import nc_setup
 
 def run_nc_linf(test_object, outs):
 
