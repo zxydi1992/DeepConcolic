@@ -28,6 +28,8 @@ def nc_setup(test_object, outs):
   print('\n== Got layer functions: {0} ==\n'.format(len(layer_functions)))
   cover_layers=get_cover_layers(test_object.test_dnn, 'NC')
   print('\n== Got cover layers: {0} ==\n'.format(len(cover_layers)))
+  for cover_layer in cover_layers:
+    print('layer:', cover_layer.layer, 'activation:', cover_layer.layer.activation)
 
   tot_size=len(test_object.raw_data.data)
   activations=None
@@ -79,6 +81,8 @@ def ssc_setup(test_object, outs):
   print('\n== Total layers: {0} ==\n'.format(len(layer_functions)))
   cover_layers=get_cover_layers(test_object.test_dnn, 'SSC')
   print('\n== Cover-able layers: {0} ==\n'.format(len(cover_layers)))
+  for layer in cover_layers:
+      print('layer:', layer.layer, 'activation:', layer.layer.activation)
 
   for i in range(0, len(cover_layers)):
     cover_layers[i].initialize_ubs()

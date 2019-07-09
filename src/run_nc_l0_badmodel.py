@@ -2,7 +2,7 @@ from nc_setup_badmodel import *
 from nc_l0 import *
 
 def run_nc_l0(test_object, outs):
-  nc_results, layer_functions, cover_layers, activations, test_cases, adversarials=nc_setup(test_object, outs)
+  nc_results, layer_functions, cover_layers, activations, test_cases, adversarials = nc_setup(test_object, outs)
   d_advs=[]
 
   count = 0
@@ -36,8 +36,8 @@ def run_nc_l0(test_object, outs):
 
       test_cases.append(new_im)
       update_nc_map_via_inst(cover_layers, eval(layer_functions, new_im), (test_object.layer_indices, test_object.feature_indices))
-      y1 = test_object.test_dnn_pred(np.array([new_im]))
-      y2 = test_object.ensemble_dnn_pred(np.array([im]))
+      y1 = test_object.test_dnn_pred(np.array([new_im]))[0]
+      y2 = test_object.ensemble_dnn_pred(np.array([im]))[0]
       if y1 != y2:
         found_count += 1
 
