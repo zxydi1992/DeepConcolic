@@ -19,7 +19,7 @@ def is_input_layer(layer):
   return str(layer).find('InputLayer')>=0
 
 def is_conv_layer(layer):
-  return (str(layer).find('conv')>=0 or str(layer).find('Conv')>=0) and str(layer).lower().find('depthwiseconv2d') == -1
+  return str(layer).find('conv')>=0 or str(layer).find('Conv')>=0
 
 def is_dense_layer(layer):
   return str(layer).find('dense')>=0 or str(layer).find('Dense')>=0
